@@ -20,6 +20,7 @@ describe("Login spec", () => {
       .contains(/^Masuk$/)
       .should("be.visible");
   });
+
   it("should display alert when email is empty", () => {
     // klik tombol login tanpa mengisi email
     cy.get("button")
@@ -34,7 +35,7 @@ describe("Login spec", () => {
 
   it("should display alert when password is empty", () => {
     // mengisi email
-    cy.get("input[placeholder=\"Masukkan Kata Sandi\"]").type("haha@email.com");
+    cy.get("input[placeholder=\"Masukkan Email\"]").type("haha@email.com");
 
     // klik tombol login tanpa mengisi password
     cy.get("button")
@@ -46,6 +47,7 @@ describe("Login spec", () => {
       expect(str).to.equal("\"password\" is not allowed to be empty");
     });
   });
+
   it("should display alert when email and password are wrong", () => {
     // mengisi email
     cy.get("input[placeholder=\"Masukkan Email\"]").type("haha1@gmail.com");
@@ -66,17 +68,21 @@ describe("Login spec", () => {
 
   it("should display homepage when email and password are correct", () => {
     // mengisi email
-    cy.get("input[placeholder=\"Masukkan Email\"]").type("haha1@gmail.com");
+    cy.get("input[placeholder=\"Masukkan Email\"]").type("surya16@gmail.com");
 
     // mengisi password
-    cy.get("input[placeholder=\"Masukkan Kata Sandi\"]").type("haha123");
+    cy.get("input[placeholder=\"Masukkan Kata Sandi\"]").type("surya16123");
 
     // menekan tombol Login
     cy.get("button")
       .contains(/^Masuk$/)
       .click();
 
+
+      // Menambahkan waktu tunggu sebelum memverifikasi tombol Logout
+  cy.wait(5000); // Menunggu 5 detik, sesuaikan dengan kebutuhan
+
     // memverifikasi bahwa elemen yang berada di homepage ditampilkan
-    cy.get("button").contains(/^Masuk$/).click();
+    cy.get("button").contains('Logout').should('be.visible');
   });
 });
