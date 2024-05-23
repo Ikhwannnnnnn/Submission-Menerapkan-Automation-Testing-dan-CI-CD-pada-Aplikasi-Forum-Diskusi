@@ -21,7 +21,7 @@ function LoginPage() {
           <div>
             <LoginInput login={onLogin} />
             <p>
-              Belum punya akun?
+              Belum punya akun ya?
               <Link className="text-blue-500 hover:underline" to="/register">
                 Daftar
               </Link>
